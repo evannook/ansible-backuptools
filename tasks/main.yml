@@ -1,2 +1,10 @@
 ---
-# tasks file for ansible-backuptools
+- block:
+  - name: install backup related packages
+    apt: "name={{ item }} state=latest"
+    with_items:
+      - borgbackup
+      - rclone
+      - sshfs
+  tags:
+    - backuptools
