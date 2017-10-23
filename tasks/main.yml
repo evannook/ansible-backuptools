@@ -6,5 +6,6 @@
       - borgbackup
       - rclone
       - sshfs
+      - nfs-common
   tags:
     - backuptools
