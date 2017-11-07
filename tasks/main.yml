@@ -1,11 +1,19 @@
 ---
 - block:
-  - name: install backup related packages
+  - name: install debian backup related packages
     apt: "name={{ item }} state=latest"
     with_items:
       - borgbackup
       - rclone
       - sshfs
       - nfs-common
+    when: ansible_distribution == 'Debian'
+  - name: install ubuntu backup related packages
+    apt: "name={{ item }} state=latest"
+    with_items:
+      - borgbackup
+      - sshfs
+      - nfs-common
+    when: ansible_distribution == 'Ubuntu'
   tags:
     - backuptools

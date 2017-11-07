@@ -7,10 +7,16 @@ galaxy_info:
   platforms:
   - name: Debian
     versions:
-    - stretch
+    - Stretch
+    - 9
+  - name: Ubuntu
+    versions:
+    - Xenial Xerus
+    - 16.04
   galaxy_tags:
     - backup
     - borgbackup
     - rclone
+    - nfs
 dependencies:
   - pylabs.sysbase
