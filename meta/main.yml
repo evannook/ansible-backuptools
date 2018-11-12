@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: backuptools
   author: William Wu
   description: Setup backuptools
   company: PyLabs
