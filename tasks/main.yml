@@ -2,7 +2,8 @@
 - block:
   - name: install debian backup related packages
     apt: "name={{ item }} state=latest"
-    with_items:
+    vars:
+      packages:
       - borgbackup
       - rclone
       - sshfs
