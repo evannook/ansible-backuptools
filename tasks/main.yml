@@ -9,8 +9,9 @@
       - nfs-common
     when: ansible_distribution == 'Debian'
   - name: install ubuntu backup related packages
-    apt: "name={{ item }} state=latest"
-    with_items:
+    apt: "name={{ packages }} state=latest"
+    vars:
+      packages:
       - borgbackup
       - sshfs
       - nfs-common
