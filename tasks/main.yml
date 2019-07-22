@@ -1,21 +1,15 @@
 ---
 - block:
-  - name: install debian backup related packages
-    apt: "name={{ packages }} state=latest"
-    vars:
-      packages:
-      - borgbackup
-      - rclone
-      - sshfs
-      - nfs-common
-    when: ansible_distribution == 'Debian'
-  - name: install ubuntu backup related packages
-    apt: "name={{ packages }} state=latest"
-    vars:
-      packages:
-      - borgbackup
-      - sshfs
-      - nfs-common
-    when: ansible_distribution == 'Ubuntu'
+  - name: install borgbackup
+    get_url:
+      url: "https://github.com/borgbackup/borg/releases/download/{{ borg_version }}/borg-linux64"
+      dest: "/usr/local/bin/borg"
+      mode: "0755"
+  - name: install rclone
+    unarchive:
+      src: "https://downloads.rclone.org/v1.48.0/rclone-v{{ rclone_version }}-linux-amd64.zip"
+      dest: "/usr/local/bin/rclone"
+      mode: "0755"
+      remote_src: "yes"
   tags:
     - backuptools

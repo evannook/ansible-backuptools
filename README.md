@@ -15,6 +15,9 @@ Example Playbook
 - hosts: servers
   roles:
      - role: pylabs.backuptools
+  vars:
+    borg_version: "1.1.10"
+    rclone_version: "1.48.0"
 ```
 
 License
