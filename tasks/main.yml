@@ -6,10 +6,7 @@
       dest: "/usr/local/bin/borg"
       mode: "0755"
   - name: install rclone
-    unarchive:
-      src: "https://downloads.rclone.org/v1.48.0/rclone-v{{ rclone_version }}-linux-amd64.zip"
-      dest: "/usr/local/bin/rclone"
-      mode: "0755"
-      remote_src: "yes"
+    apt:
+      deb: "https://downloads.rclone.org/v1.48.0/rclone-v{{ rclone_version }}-linux-amd64.deb"
   tags:
     - backuptools
