@@ -1,13 +1,27 @@
 ---
 - block:
-  - name: install fuse tools
+  - name: install related tools
     apt:
-      name: "fuse"
+      name:
+        - "fuse"
+        - "python3-pip"
+      state: latest
   - name: install borgbackup
     get_url:
       url: "https://github.com/borgbackup/borg/releases/download/{{ borg_version }}/borg-linux64"
       dest: "/usr/local/bin/borg"
       mode: "0755"
+  - name: install borgmatic
+    command: "pip3 install borgmatic=={{ borgmatic_version }} --user"
+  - name: create borgmatic config dir
+    file:
+      path: "/etc/borgmatic"
+      state: "directory"
+      owner: "root"
+      group: "root"
+      mode: "0700"
+  - name: create borgmatic default config
+    command: "/root/.local/bin/generate-borgmatic-config"
   - name: install rclone
     apt:
       deb: "https://downloads.rclone.org/v1.48.0/rclone-v{{ rclone_version }}-linux-amd64.deb"

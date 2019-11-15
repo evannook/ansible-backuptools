@@ -17,6 +17,7 @@ Example Playbook
      - role: pylabs.backuptools
   vars:
     borg_version: "1.1.10"
+    borgmatic_version: "1.4.10"
     rclone_version: "1.48.0"
 ```
 
