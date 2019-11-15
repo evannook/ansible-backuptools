@@ -4,6 +4,7 @@
     apt:
       name:
         - "fuse"
+        - "nfs-common"
         - "python3-pip"
       state: latest
   - name: install borgbackup
