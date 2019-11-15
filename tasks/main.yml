@@ -23,8 +23,7 @@
       mode: "0700"
   - name: create borgmatic default config
     command: "/root/.local/bin/generate-borgmatic-config"
-  - name: install rclone
-    apt:
-      deb: "https://downloads.rclone.org/v1.48.0/rclone-v{{ rclone_version }}-linux-amd64.deb"
+    args:
+      creates: "/etc/borgmatic/config.yaml"
   tags:
     - backuptools
