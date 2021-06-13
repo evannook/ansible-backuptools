@@ -1,15 +1,29 @@
 ---
 - block:
-  - name: install fuse tools
+  - name: install related tools
     ansible.builtin.apt:
-      name: "fuse"
+      name:
+        - "fuse"
+        - "nfs-common"
+        - "python3-pip"
+      state: latest
   - name: install borgbackup
     ansible.builtin.get_url:
       url: "https://github.com/borgbackup/borg/releases/download/{{ borg_version }}/borg-linux64"
       dest: "/usr/local/bin/borg"
       mode: "0755"
-  - name: install rclone
-    ansible.builtin.apt:
-      deb: "https://downloads.rclone.org/v1.48.0/rclone-v{{ rclone_version }}-linux-amd64.deb"
+  - name: install borgmatic
+    ansible.builtin.command: "pip3 install borgmatic=={{ borgmatic_version }} --user"
+  - name: create borgmatic config dir
+    ansible.builtin.file:
+      path: "/etc/borgmatic"
+      state: "directory"
+      owner: "root"
+      group: "root"
+      mode: "0700"
+  - name: create borgmatic default config
+    ansible.builtin.command: "/root/.local/bin/generate-borgmatic-config"
+    args:
+      creates: "/etc/borgmatic/config.yaml"
   tags:
     - backuptools
